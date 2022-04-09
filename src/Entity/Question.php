@@ -33,7 +33,7 @@ class Question
     private $question;
 
     /**
-     * @ORM\Column(type="datetime_immutable", nullable=true)
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $askedAt;
 
@@ -83,12 +83,12 @@ class Question
         return $this;
     }
 
-    public function getAskedAt(): ?\DateTimeImmutable
+    public function getAskedAt(): ?\DateTime
     {
         return $this->askedAt;
     }
 
-    public function setAskedAt(?\DateTimeImmutable $askedAt): self
+    public function setAskedAt(?\DateTime $askedAt): self
     {
         $this->askedAt = $askedAt;
 
