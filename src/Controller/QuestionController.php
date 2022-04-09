@@ -49,16 +49,15 @@ class QuestionController extends AbstractController
      */
     public function show(Question $question)
     {
-        if ($this->isDebug) {
+        if ($this->isDebug)
             $this->logger->info('We are in debug mode!');
-        }
 
-        $answers = [
-            'Make sure your cat is sitting `purrrfectly` still 🤣',
-            'Honestly, I like furry shoes better than MY cat',
-            'Maybe... try saying the spell backwards?',
-        ];
+        $answers = $question->getAnswers();
+        // в этот момент запрос на получение ответов еще не отправлен
 
+        // ленивая загрузка (lazy loading)
+        // ответы загружаются из бд только после того,
+        // как мы к ним обращаемся в шаблоне
         return $this->render('question/show.html.twig', [
             'question' => $question,
             'answers' => $answers,

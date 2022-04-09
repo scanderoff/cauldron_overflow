@@ -60,13 +60,13 @@
                         <img src="{{ asset('images/tisha.png') }}" width="50" height="50" alt="Tisha avatar">
                     </div>
                     <div class="mr-3 pt-2">
-                        {{ answer|parse_markdown }}
-                        <p>-- Mallory</p>
+                        {{ answer.content|parse_markdown }}
+                        <p>-- {{ answer.username }}</p>
                     </div>
                     <div class="vote-arrows flex-fill pt-2 js-vote-arrows" style="min-width: 90px;">
                         <button class="vote-up btn btn-link" name="direction" value="up"><i class="far fa-arrow-alt-circle-up"></i></button>
                         <button class="vote-down btn btn-link" name="direction" value="down"><i class="far fa-arrow-alt-circle-down"></i></button>
-                        <span>+ <span class="js-vote-total">6</span></span>
+                        <span>+ <span class="js-vote-total">{{ answer.votes }}</span></span>
                     </div>
                 </div>
             </li>
