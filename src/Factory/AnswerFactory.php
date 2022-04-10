@@ -44,7 +44,13 @@ final class AnswerFactory extends ModelFactory
             'votes' => self::faker()->numberBetween(-20, 50),
             'createdAt' => self::faker()->dateTimeBetween('-1 year'),
             'question' => QuestionFactory::new()->unpublished(),
+            'status' => Answer::STATUS_APPROVED,
         ];
+    }
+
+    public function needsApproval(): self
+    {
+        return $this->addState(['status' => Answer::STATUS_NEEDS_APPROVAL]);
     }
 
     protected function initialize(): self

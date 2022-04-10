@@ -52,7 +52,7 @@ class QuestionController extends AbstractController
         if ($this->isDebug)
             $this->logger->info('We are in debug mode!');
 
-        $answers = $question->getAnswers();
+        // $answers = $question->getAnswers();
         // в этот момент запрос на получение ответов еще не отправлен
 
         // ленивая загрузка (lazy loading)
@@ -60,7 +60,9 @@ class QuestionController extends AbstractController
         // как мы к ним обращаемся в шаблоне
         return $this->render('question/show.html.twig', [
             'question' => $question,
-            'answers' => $answers,
+            // 'answers' => $answers,
+            // закомментил, т.к. мы можем получить ответы из объекта $question
+            // внутри шаблона - question.answers. Вызовется $question->getAnswers()
         ]);
     }
 

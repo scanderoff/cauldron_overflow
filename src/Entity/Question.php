@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\QuestionRepository;
+use App\Repository\AnswerRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -50,7 +51,8 @@ class Question
     private $votes = 0;
 
     /**
-     * @ORM\OneToMany(targetEntity=Answer::class, mappedBy="question")
+     * @ORM\OneToMany(targetEntity=Answer::class, mappedBy="question", fetch="EXTRA_LAZY")
+     * @ORM\OrderBy({"createdAt" = "DESC"})
      */
     private $answers;
 
@@ -153,9 +155,15 @@ class Question
         return $this->answers;
     }
 
+    public function getApprovedAnswers(): Collection
+    {
+        return $this->answers->matching(AnswerRepository::createApprovedCriteria());
+    }
+
     public function addAnswer(Answer $answer): self
     {
-        if (!$this->answers->contains($answer)) {
+        if (!$this->answers->contains($answer))
+        {
             $this->answers[] = $answer;
             $answer->setQuestion($this);
         }

@@ -1,6 +1,10 @@
 @import "~bootstrap";
 
 body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+
     font-family: spartan;
     color: #444;
 }
@@ -134,4 +138,8 @@ fieldset[disabled] .btn-question.active {
 
 footer {
     background-color: #efefee;
+}
+
+body > .container.my-md-4 {
+    flex-grow: 1;
 }
