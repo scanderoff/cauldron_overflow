@@ -140,6 +140,6 @@ footer {
     background-color: #efefee;
 }
 
-body > .container.my-md-4 {
+body > .container {
     flex-grow: 1;
 }
