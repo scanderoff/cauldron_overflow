@@ -50,11 +50,14 @@ class QuestionRepository extends ServiceEntityRepository
      * @return Question[] Returns an array of Question objects
      */
 
-    public function findAllAskedOrderedByNewest()
+    public function findAllAskedOrderedByNewest(): array
     {
         return $this
             ->addIsAskedQueryBuilder()
             ->orderBy('q.askedAt', 'DESC')
+            ->leftJoin('q.questionTags', 'question_tag')
+            ->innerJoin('question_tag.tag', 'tag')
+            ->addSelect('question_tag', 'tag')
             ->getQuery()
             ->getResult()
         ;
@@ -72,16 +75,4 @@ class QuestionRepository extends ServiceEntityRepository
     {
         return $qb ?: $this->createQueryBuilder('q');
     }
-
-    /*
-    public function findOneBySomeField($value): ?Question
-    {
-        return $this->createQueryBuilder('q')
-            ->andWhere('q.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }
