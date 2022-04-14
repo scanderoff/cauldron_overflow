@@ -5,9 +5,6 @@
     "clue/stream-filter": {
         "version": "v1.4.1"
     },
-    "composer/package-versions-deprecated": {
-        "version": "1.11.99.5"
-    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {
@@ -362,6 +359,9 @@
     "symfony/options-resolver": {
         "version": "v5.0.7"
     },
+    "symfony/password-hasher": {
+        "version": "v5.4.3"
+    },
     "symfony/polyfill-intl-grapheme": {
         "version": "v1.17.1"
     },
@@ -406,8 +406,29 @@
             "config/routes.yaml"
         ]
     },
+    "symfony/security-bundle": {
+        "version": "5.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "5.3",
+            "ref": "98f1f2b0d635908c2b40f3675da2d23b1a069d30"
+        },
+        "files": [
+            "./config/packages/security.yaml"
+        ]
+    },
     "symfony/security-core": {
         "version": "v5.0.7"
+    },
+    "symfony/security-csrf": {
+        "version": "v5.3.14"
+    },
+    "symfony/security-guard": {
+        "version": "v5.3.14"
+    },
+    "symfony/security-http": {
+        "version": "v5.3.14"
     },
     "symfony/service-contracts": {
         "version": "v2.0.1"

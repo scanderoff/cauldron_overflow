@@ -25,9 +25,9 @@ class QuestionController extends AbstractController
 
 
     /**
-     * @Route("/", name="app_homepage")
+     * @Route("/{page<\d+>}", name="app_homepage")
      */
-    public function homepage(QuestionRepository $repository)
+    public function homepage(QuestionRepository $repository, int $page = 1)
     {
         $questions = $repository->findAllAskedOrderedByNewest();
 
