@@ -20,14 +20,6 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * @Route("/admin", name="app_admin")
-     */
-    // public function admin(AuthenticationUtils $authenticationUtils): Response
-    // {
-    //     return new Response('admin');
-    // }
-
-    /**
      * @Route("/logout", name="app_logout")
      */
     public function logout(): Response
