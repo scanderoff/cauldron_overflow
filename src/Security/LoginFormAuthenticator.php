@@ -11,27 +11,24 @@ use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Exception\UserNotFoundException;
-use Symfony\Component\Security\Http\Authenticator\AbstractAuthenticator;
+use Symfony\Component\Security\Http\Authenticator\AbstractLoginFormAuthenticator;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordCredentials;
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Component\Security\Http\Authenticator\Passport\PassportInterface;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\CsrfTokenBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\RememberMeBadge;
-use Symfony\Component\Security\Http\EntryPoint\AuthenticationEntryPointInterface;
+use Symfony\Component\Security\Http\Util\TargetPathTrait;
 use Symfony\Component\Routing\RouterInterface;
 
-class LoginFormAuthenticator extends AbstractAuthenticator implements AuthenticationEntryPointInterface
+class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
 {
+    use TargetPathTrait;
+
     public function __construct(UserRepository $userRepository, RouterInterface $router)
     {
         $this->userRepository = $userRepository;
         $this->router = $router;
-    }
-
-    public function supports(Request $request): ?bool
-    {
-        return $request->getPathInfo() === '/login' && $request->isMethod('POST');
     }
 
     public function authenticate(Request $request): Passport
@@ -64,21 +61,26 @@ class LoginFormAuthenticator extends AbstractAuthenticator implements Authentica
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
+        $target = $this->getTargetPath($request->getSession(), $firewallName);
+
+        if ($target) {
+            return new RedirectResponse($target);
+        }
+
         return new RedirectResponse($this->router->generate('app_homepage'));
-    }
-
-    public function onAuthenticationFailure(Request $request, AuthenticationException $exception): ?Response
-    {
-        $request->getSession()->set(Security::AUTHENTICATION_ERROR, $exception);
-
-        return new RedirectResponse($this->router->generate('app_login'));
     }
 
     // это entry point firewall'a
     // если анонимный юзер зайдет на запрещенную страницу
     // вызовется этот метод и редиректнет его на страницу логина
-    public function start(Request $request, AuthenticationException $authException = null): Response
+    // закомментили, т.к. теперь мы экстендим другой класс, в котором это реализовано
+    // public function start(Request $request, AuthenticationException $authException = null): Response
+    // {
+    //     return new RedirectResponse($this->router->generate('app_login'));
+    // }
+
+    protected function getLoginUrl(Request $request): string
     {
-        return new RedirectResponse($this->router->generate('app_login'));
+        return $this->router->generate('app_login');
     }
 }
