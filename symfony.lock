@@ -472,6 +472,9 @@
             "templates/base.html.twig"
         ]
     },
+    "symfony/ux-chartjs": {
+        "version": "v2.1.0"
+    },
     "symfony/var-dumper": {
         "version": "v5.0.4"
     },

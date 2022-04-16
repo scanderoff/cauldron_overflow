@@ -10,14 +10,21 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
-class AnswerController extends AbstractController
+class AnswerController extends BaseController
 {
     /**
      * @Route("/answers/{id}/vote", name="answer_vote", methods="POST")
+     * @IsGranted("IS_AUTHENTICATED_REMEMBERED")
      */
     public function answerVote(Answer $answer, LoggerInterface $logger, Request $request, EntityManagerInterface $entityManager)
     {
+        $logger->info('{user} is voting on answer {answer}', [
+            'user' => $this->getUser()->getEmail(),
+            'answer' => $answer->getId(),
+        ]);
+
         $data = json_decode($request->getContent(), true)['data'];
         $direction = $data['direction'] ?? 'up';
 
