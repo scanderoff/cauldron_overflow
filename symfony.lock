@@ -157,6 +157,15 @@
     "php-http/promise": {
         "version": "v1.0.0"
     },
+    "phpdocumentor/reflection-common": {
+        "version": "2.2.0"
+    },
+    "phpdocumentor/reflection-docblock": {
+        "version": "5.3.0"
+    },
+    "phpdocumentor/type-resolver": {
+        "version": "1.6.1"
+    },
     "psr/cache": {
         "version": "1.0.1"
     },
@@ -298,6 +307,9 @@
             ".env"
         ]
     },
+    "symfony/form": {
+        "version": "v5.3.14"
+    },
     "symfony/framework-bundle": {
         "version": "5.1",
         "recipe": {
@@ -365,6 +377,9 @@
     "symfony/polyfill-intl-grapheme": {
         "version": "v1.17.1"
     },
+    "symfony/polyfill-intl-icu": {
+        "version": "v1.25.0"
+    },
     "symfony/polyfill-intl-normalizer": {
         "version": "v1.17.1"
     },
@@ -430,6 +445,9 @@
     "symfony/security-http": {
         "version": "v5.3.14"
     },
+    "symfony/serializer": {
+        "version": "v5.3.14"
+    },
     "symfony/service-contracts": {
         "version": "v2.0.1"
     },
@@ -474,6 +492,18 @@
     },
     "symfony/ux-chartjs": {
         "version": "v2.1.0"
+    },
+    "symfony/validator": {
+        "version": "5.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "5.3",
+            "ref": "c32cfd98f714894c4f128bb99aa2530c1227603c"
+        },
+        "files": [
+            "config/packages/validator.yaml"
+        ]
     },
     "symfony/var-dumper": {
         "version": "v5.0.4"
@@ -525,6 +555,9 @@
     },
     "twig/twig": {
         "version": "v3.0.1"
+    },
+    "webmozart/assert": {
+        "version": "1.10.0"
     },
     "zenstruck/assert": {
         "version": "v1.0.1"
