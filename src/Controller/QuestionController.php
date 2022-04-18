@@ -51,8 +51,9 @@ class QuestionController extends AbstractController
      */
     public function show(Question $question)
     {
-        if ($this->isDebug)
+        if ($this->isDebug) {
             $this->logger->info('We are in debug mode!');
+        }
 
         // $answers = $question->getAnswers();
         // в этот момент запрос на получение ответов еще не отправлен
@@ -65,6 +66,19 @@ class QuestionController extends AbstractController
             // 'answers' => $answers,
             // закомментил, т.к. мы можем получить ответы из объекта $question
             // внутри шаблона - question.answers. Вызовется $question->getAnswers()
+        ]);
+    }
+
+    /**
+     * @Route("/questions/edit/{slug}", name="app_question_edit")
+     */
+    public function edit(Question $question): Response
+    {
+        $this->denyAccessUnlessGranted('EDIT', $question);
+
+
+        return $this->render('question/edit.html.twig', [
+            'question' => $question,
         ]);
     }
 
