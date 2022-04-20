@@ -1,9 +1,18 @@
 {
+    "bacon/bacon-qr-code": {
+        "version": "2.0.7"
+    },
+    "beberlei/assert": {
+        "version": "v3.3.2"
+    },
     "behat/transliterator": {
         "version": "v1.5.0"
     },
     "clue/stream-filter": {
         "version": "v1.4.1"
+    },
+    "dasprid/enum": {
+        "version": "1.0.3"
     },
     "doctrine/annotations": {
         "version": "1.0",
@@ -100,6 +109,9 @@
     "doctrine/sql-formatter": {
         "version": "1.1.2"
     },
+    "endroid/qr-code": {
+        "version": "4.4.8"
+    },
     "fakerphp/faker": {
         "version": "v1.19.0"
     },
@@ -138,6 +150,9 @@
     },
     "nikic/php-parser": {
         "version": "v4.3.0"
+    },
+    "paragonie/constant_time_encoding": {
+        "version": "v2.5.0"
     },
     "php-http/client-common": {
         "version": "2.1.0"
@@ -203,6 +218,9 @@
             "./config/routes/scheb_2fa.yaml"
         ]
     },
+    "scheb/2fa-totp": {
+        "version": "v5.13.2"
+    },
     "sensio/framework-extra-bundle": {
         "version": "5.2",
         "recipe": {
@@ -232,6 +250,9 @@
         "files": [
             "config/packages/sentry.yaml"
         ]
+    },
+    "spomky-labs/otphp": {
+        "version": "v10.0.3"
     },
     "stof/doctrine-extensions-bundle": {
         "version": "1.5",
@@ -577,6 +598,9 @@
     },
     "symfonycasts/verify-email-bundle": {
         "version": "v1.10.0"
+    },
+    "thecodingmachine/safe": {
+        "version": "v1.3.3"
     },
     "twig/extra-bundle": {
         "version": "v3.0.1"
