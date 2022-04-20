@@ -13,6 +13,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 use Symfony\Component\Security\Http\Authenticator\FormLoginAuthenticator;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use SymfonyCasts\Bundle\VerifyEmail\VerifyEmailHelperInterface;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
@@ -87,5 +88,26 @@ class RegistrationController extends AbstractController {
         $this->addFlash('success', 'Account Verified! You can now log in.');
 
         return $this->redirectToRoute('app_login');
+    }
+
+    /**
+     * @Route("/verify/resend", name="app_verify_resend_email")
+     */
+    public function resendVerifyEmail(Request $request, VerifyEmailHelperInterface $verifyEmailHelper, AuthenticationUtils $authenticationUtils, UserRepository $userRepository, EntityManagerInterface $entityManager): Response {
+        if ($request->isMethod('POST')) {
+            $email = $authenticationUtils->getLastUsername();
+            $user = $userRepository->findOneBy(['email' => $email]);
+
+            $signatureComponents = $verifyEmailHelper->generateSignature(
+                'app_verify_email',
+                $user->getId(),
+                $user->getEmail(),
+                ['id' => $user->getId()],
+            );
+
+            $this->addFlash('success', "Confirm your email at: {$signatureComponents->getSignedUrl()}");
+        }
+
+        return $this->render('registration/resend_verify_email.html.twig');
     }
 }
